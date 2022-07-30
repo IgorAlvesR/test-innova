@@ -1,5 +1,6 @@
 <template>
   <v-tabs
+    v-model="tab"
     prev-icon="mdi-arrow-left-bold-outline"
     next-icon="mdi-arrow-right-bold-outline"
     grow
@@ -19,7 +20,25 @@
     </v-tab>
 
     <v-tab-item>exibição</v-tab-item>
-    <v-tab-item>cadastro</v-tab-item>
+    <v-tab-item>
+      <!-- 
+        TRICK - utilizado condicional para que os dados sejam re-renderizados ao mudar para essa tab
+       -->
+      <FormIntegrators v-if="tab === 1" />
+    </v-tab-item>
     <v-tab-item>gráficos</v-tab-item>
   </v-tabs>
 </template>
+
+<script>
+import FormIntegrators from './FormIntegrators'
+
+export default {
+  components: {
+    FormIntegrators
+  },
+  data: () => ({
+    tab: null
+  })
+}
+</script>
