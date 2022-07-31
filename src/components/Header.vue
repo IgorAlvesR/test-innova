@@ -2,7 +2,7 @@
   <v-app-bar dark elevate-on-scroll class="flex-grow-0">
     <v-toolbar-title class="d-flex align-center">
       Integradores |
-      <span class="header__title">Paineis Solares</span>
+      <span class="header__title">Painéis Solares</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-icon>mdi-weather-sunny</v-icon>
