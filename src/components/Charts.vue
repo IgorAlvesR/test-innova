@@ -37,6 +37,24 @@
         <br />
         <hr />
       </v-col>
+      <v-col cols="12">
+        <PieChart
+          :width="100"
+          :height="100"
+          :chartData="{
+            datasets: [
+              {
+                data: filterCompanySize(),
+                backgroundColor: colorsStates
+              }
+            ],
+            labels: companySize
+          }"
+        />
+        <p>Integradores por porte da empresa</p>
+        <br />
+        <hr />
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -49,7 +67,16 @@ export default {
     PieChart
   },
   data: () => ({
-    integrators: []
+    integrators: [],
+    marks: [
+      'Jinko Solar',
+      'Trina Solar',
+      'Canadian Solar',
+      'Ja Solar',
+      'Hanwha Q-Cells',
+      'GCL-Si'
+    ],
+    companySize: ['Pequena', 'Média', 'Grande']
   }),
   computed: {
     colorsStates() {
@@ -57,16 +84,6 @@ export default {
     },
     states() {
       return this.integrators.map((it) => it.estado)
-    },
-    marks() {
-      return [
-        'Jinko Solar',
-        'Trina Solar',
-        'Canadian Solar',
-        'Ja Solar',
-        'Hanwha Q-Cells',
-        'GCL-Si'
-      ]
     }
   },
   async mounted() {
@@ -74,7 +91,8 @@ export default {
   },
   methods: {
     /*
-    TRICK -> código apenas para filtrar quantidade de estados que existem
+    TRICK -> código apenas para filtrar quantidade integradores por estados,
+    marcas e porte da empresa que existem,
     deveria estar na api
     */
     filterStates() {
@@ -103,6 +121,21 @@ export default {
         })
       })
       countMark.forEach((it) => {
+        count.push(...Object.values(it))
+      })
+      return count
+    },
+    filterCompanySize() {
+      const countCompanySize = []
+      const count = []
+      this.companySize.forEach((companySize) => {
+        countCompanySize.push({
+          [companySize]: this.integrators.filter(
+            (it) => it.porteEmpresa === companySize
+          ).length
+        })
+      })
+      countCompanySize.forEach((it) => {
         count.push(...Object.values(it))
       })
       return count
