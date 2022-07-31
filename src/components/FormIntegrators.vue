@@ -1,14 +1,27 @@
 <template>
   <v-container class="mt-6">
     <v-card class="pa-6">
+      <v-alert :value="!!error" transition="scale-transition" type="error">
+        {{ error }}
+      </v-alert>
+      <v-alert
+        :value="showAlertSuccess && !error"
+        transition="scale-transition"
+        type="success"
+      >
+        Integrador cadastrado com sucesso
+      </v-alert>
       <v-form ref="form" v-model="valid" lazy-validation>
-        <FieldCpfCnpj v-model="cpfCnpj" />
-        <v-text-field v-model="integratorName" label="Nome do integrador" />
-        <v-text-field v-model="ownerName" label="Nome do proprietário" />
-        <FieldState v-model="state" />
-        <v-text-field v-model="city" label="Cidade" />
+        <FieldCpfCnpj v-model="integrator.cpfCnpj" />
+        <v-text-field v-model="integrator.name" label="Nome do integrador" />
+        <v-text-field
+          v-model="integrator.ownerName"
+          label="Nome do proprietário"
+        />
+        <FieldState v-model="integrator.state" />
+        <v-text-field v-model="integrator.city" label="Cidade" />
         <v-autocomplete
-          v-model="marks"
+          v-model="integrator.marks"
           multiple
           chips
           label="Marcas de painéis"
@@ -22,7 +35,7 @@
           ]"
         />
         <v-autocomplete
-          v-model="companySize"
+          v-model="integrator.companySize"
           label="Porte da empresa"
           :items="['Pequena', 'Média', 'Grande']"
         />
@@ -38,6 +51,7 @@
 <script>
 import FieldCpfCnpj from './FieldCpfCnpj'
 import FieldState from './FieldState'
+import { fetchAddIntegrators } from './providers/ProviderIntegrators'
 
 export default {
   components: {
@@ -46,19 +60,36 @@ export default {
   },
   data: () => ({
     valid: true,
-    integratorName: null,
-    cpfCnpj: null,
-    ownerName: null,
-    state: null,
-    city: null,
-    marks: [],
-    companySize: null
+    showAlertSuccess: false,
+    error: false,
+    integrator: {
+      name: null,
+      cpfCnpj: null,
+      ownerName: null,
+      state: null,
+      city: null,
+      marks: [],
+      companySize: null
+    }
   }),
   methods: {
-    add() {
+    disabledAlert(alert) {
+      setTimeout(() => {
+        this[alert] = false
+      }, 3000)
+    },
+    async add() {
       const isValid = this.$refs.form.validate()
       if (isValid) {
-        console.log('é válido')
+        const response = await fetchAddIntegrators(this.integrator)
+        if (response?.message) {
+          this.error = response.message
+          this.disabledAlert('error')
+          return
+        }
+        this.$refs.form.reset()
+        this.showAlertSuccess = true
+        this.disabledAlert('showAlertSuccess')
       }
     }
   }
