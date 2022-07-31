@@ -19,27 +19,31 @@
       Gráficos
     </v-tab>
 
+    <!-- 
+        TRICK - utilizado condicional para que os dados sejam re-renderizados ao mudar para essa tab
+       -->
     <v-tab-item>
       <TableIntegrators v-if="tab === 0" />
     </v-tab-item>
     <v-tab-item>
-      <!-- 
-        TRICK - utilizado condicional para que os dados sejam re-renderizados ao mudar para essa tab
-       -->
       <FormIntegrators v-if="tab === 1" />
     </v-tab-item>
-    <v-tab-item>gráficos</v-tab-item>
+    <v-tab-item>
+      <Charts v-if="tab === 2" />
+    </v-tab-item>
   </v-tabs>
 </template>
 
 <script>
 import FormIntegrators from './FormIntegrators'
 import TableIntegrators from './TableIntegrators'
+import Charts from './Charts'
 
 export default {
   components: {
     FormIntegrators,
-    TableIntegrators
+    TableIntegrators,
+    Charts
   },
   data: () => ({
     tab: null
