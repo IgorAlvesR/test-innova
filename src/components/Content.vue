@@ -19,7 +19,9 @@
       Gráficos
     </v-tab>
 
-    <v-tab-item>exibição</v-tab-item>
+    <v-tab-item>
+      <TableIntegrators v-if="tab === 0" />
+    </v-tab-item>
     <v-tab-item>
       <!-- 
         TRICK - utilizado condicional para que os dados sejam re-renderizados ao mudar para essa tab
@@ -32,10 +34,12 @@
 
 <script>
 import FormIntegrators from './FormIntegrators'
+import TableIntegrators from './TableIntegrators'
 
 export default {
   components: {
-    FormIntegrators
+    FormIntegrators,
+    TableIntegrators
   },
   data: () => ({
     tab: null

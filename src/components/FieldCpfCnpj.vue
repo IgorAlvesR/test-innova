@@ -1,6 +1,6 @@
 <template>
   <v-text-field
-    :value="cpfCnpj"
+    :value="value"
     @input="$emit('input', $event)"
     :rules="cpfCnpjRules"
     label="Cpf/Cnpj"
@@ -14,7 +14,7 @@ import { cpf, cnpj } from 'cpf-cnpj-validator'
 
 export default {
   props: {
-    cpfCnpj: String
+    value: String
   },
   data: () => ({
     cpfCnpjRules: [
