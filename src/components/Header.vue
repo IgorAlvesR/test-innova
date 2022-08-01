@@ -5,7 +5,8 @@
       <span class="header__title">Painéis Solares</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-icon>mdi-weather-sunny</v-icon>
+
+    <v-img max-width="50" src="../assets/paineisSolares.png"></v-img>
   </v-app-bar>
 </template>
 
