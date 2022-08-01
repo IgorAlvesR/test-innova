@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    data-testid
     :value="value"
     @input="$emit('input', $event)"
     :rules="cpfCnpjRules"
