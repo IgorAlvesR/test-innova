@@ -3,7 +3,7 @@
     :value="value"
     @input="$emit('input', $event)"
     :rules="cpfCnpjRules"
-    label="Cpf/Cnpj"
+    label="CPF/CNPJ"
     v-mask="['###.###.###-##', '##.###.###/####-##']"
     required
   />

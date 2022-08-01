@@ -8,6 +8,7 @@
         :headers="headers"
         :items="integrators"
         :footer-props="{ itemsPerPageText: 'Itens por página' }"
+        disable-sort
       >
         <template v-slot:top>
           <v-dialog v-model="dialog">
@@ -93,7 +94,7 @@ export default {
     editedItem: null,
     dialog: false,
     headers: [
-      { text: 'Cpf/Cnpj', value: 'cpfCnpj' },
+      { text: 'CPF/CNPJ', value: 'cpfCnpj' },
       { text: 'Nome do integrador', value: 'integratorName' },
       { text: 'Nome do proprietário', value: 'ownerName' },
       { text: 'Ações', value: 'actions' }
