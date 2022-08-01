@@ -3,8 +3,6 @@
     <v-row>
       <v-col cols="12">
         <PieChart
-          :width="100"
-          :height="100"
           :chartData="{
             datasets: [
               {
@@ -21,8 +19,6 @@
       </v-col>
       <v-col cols="12">
         <PieChart
-          :width="100"
-          :height="100"
           :chartData="{
             datasets: [
               {
@@ -39,8 +35,6 @@
       </v-col>
       <v-col cols="12">
         <PieChart
-          :width="100"
-          :height="100"
           :chartData="{
             datasets: [
               {

@@ -1,14 +1,19 @@
 <template>
-  <Pie
-    :chartData="chartData"
-    :chartOptions="chartOptions"
-    :chartId="chartId"
-    :width="width"
-    :height="height"
-    :cssClasses="cssClasses"
-    :styles="styles"
-    :plugins="plugins"
-  />
+  <v-container style="max-width: 300px">
+    <div v-if="!isLengthChartData" class="text-center">
+      <v-progress-circular indeterminate color="primary" />
+    </div>
+    <Pie
+      v-else
+      :chartData="chartData"
+      :chartId="chartId"
+      :width="width"
+      :height="height"
+      :cssClasses="cssClasses"
+      :styles="styles"
+      :plugins="plugins"
+    />
+  </v-container>
 </template>
 <script>
 import { Pie } from 'vue-chartjs/legacy'
@@ -60,6 +65,11 @@ export default {
       responsive: true,
       maintainAspectRatio: false
     }
-  })
+  }),
+  computed: {
+    isLengthChartData() {
+      return this.chartData?.datasets[0]?.data.length
+    }
+  }
 }
 </script>
