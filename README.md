@@ -51,4 +51,4 @@ Utilizado husk para que ao fazer um commit, execute o comando `yarn lint` fazend
 
 ### Acesse o projeto na seguinte url
 
-https://teste-innova.herokuapp.com/
+https://test-innova-9pk25ufce-igoralvesr.vercel.app/
